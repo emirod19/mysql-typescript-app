@@ -4,13 +4,17 @@ import express, {Application} from "express";
 
 export class App{
     app: Application;
-
-    constructor(){
+    port:
+    constructor(private port: number| string){
         this.app = express();
+        this.settings();
+    }
+    settings(){
+        this.app.set('port', this.port|| process.env.PORT || 3000);
     }
 
-    async listen(){
-         await this.app.listen(3000);
-        console.log('Server on port',3000);
+    async listen(port){
+         await this.app.listen(this.app.get('port'));
+        console.log('Server on port',his.app.get('port'));
     }
 }
